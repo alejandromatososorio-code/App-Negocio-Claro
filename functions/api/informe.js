@@ -38,6 +38,11 @@ export async function onRequestPost({ request, env }) {
     if (!t) return Response.json({ error: 'vacio' }, { status: 502 });
     return Response.json({ t });
   } catch (e) {
-    return Response.json({ error: 'ia' }, { status: 500 });
+    return Response.json({ error: 'ia', d: String(e && e.message ? e.message : e).slice(0, 140) }, { status: 500 });
   }
+}
+
+// Diagnóstico: abre /api/informe en el navegador. Debe mostrar {"ok":true,"ai":true}
+export async function onRequestGet({ env }) {
+  return Response.json({ ok: true, ai: !!env.AI });
 }
