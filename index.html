@@ -136,12 +136,20 @@ show(`<p class="mu">Autodiagnóstico de</p><h1>${esc(S.n)||'tu negocio'}</h1>
 <p class="mu">La nota digital mide lo que muestras a tus clientes. La madurez mide cómo trabajas por dentro.</p>
 <h3>Cómo está cada parte</h3>${sem}
 ${hm>0?`<div class="cd hrs" style="margin-top:20px"><p>Al menos <b>${hm} horas al mes</b> se te van en tareas repetitivas a mano.</p><p class="mu">Operación: ${hv} horas por semana × 4,3 = ${hm} horas al mes</p></div>`:''}
+<div id="ia"></div>
 <h3>Qué mejorar primero</h3>
 ${plan.length?`<ol class="pl">${plan.map(x=>`<li><b>${x.t}</b>${x.f}${x.c?'<span class="mu"> Sale de cruzar dos de tus respuestas.</span>':''}</li>`).join('')}</ol>`:'<p>No salieron puntos críticos con tus respuestas. Buen trabajo: el siguiente paso es automatizar para ganar tiempo.</p>'}
 <div class="cta np"><h3>¿Quieres que lo arreglemos por ti?</h3><p>Con IA: tu página web, respuestas automáticas, pedidos y recordatorios que trabajan mientras tú atiendes.</p><a class="b" href="${wa}" target="_blank" rel="noopener">Hablar por WhatsApp</a></div>
 <button class="b np" style="background:var(--cd);color:var(--tx);border:2px solid var(--ln)" onclick="print()">Guardar informe en PDF</button>
 <button class="g np" onclick="rs()">Hacer la auditoría de nuevo</button>
-<p class="mu" style="margin-top:14px">Este informe sale de lo que tú respondiste. ${nd?`Marcaste “No sé” en ${nd} pregunta${nd>1?'s':''}: no puntúan y quedan como sin datos. `:''}No se revisó ningún sistema ni cuenta de tu negocio.</p>`)}
+<p class="mu" style="margin-top:14px">Este informe sale de lo que tú respondiste. ${nd?`Marcaste “No sé” en ${nd} pregunta${nd>1?'s':''}: no puntúan y quedan como sin datos. `:''}No se revisó ningún sistema ni cuenta de tu negocio.</p>`);ia(dn,mn,hm,plan)}
+
+async function ia(dn,mn,hm,plan){const el=document.getElementById('ia');if(!el||dn==null)return;
+el.innerHTML='<div class="cd" style="margin-top:20px"><p class="mu">Escribiendo tu resumen personalizado…</p></div>';
+try{const c=new AbortController(),t=setTimeout(()=>c.abort(),20000);
+const r=await fetch('/api/informe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({n:S.n,dn,mn,hm,p:plan.slice(0,3).map(x=>x.t)}),signal:c.signal});clearTimeout(t);
+const j=await r.json();if(!r.ok||!j.t)throw 0;
+el.innerHTML=`<div class="cd" style="margin-top:20px"><p class="mu">Resumen para tu negocio</p><p>${esc(j.t).replace(/\n/g,'<br>')}</p></div>`}catch(e){el.innerHTML=''}}
 
 if(S.v=='q')qz();else if(S.v=='r')res();else wel();
 </script>
