@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b4f5c">
+<meta name="description" content="Auditoría gratis para tu negocio: descubre qué te falta para vender más.">
+<title>NegocioClaro, auditoría gratis de tu negocio</title>
+<style>
+:root{--bg:#f2f6f7;--cd:#fff;--tx:#0f2830;--mu:#566c73;--pr:#0b4f5c;--on:#fff;--ac:#ffc93c;--ok:#1d9a5f;--am:#d99a00;--bad:#d9432f;--ln:#d6e1e3;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#0c1a1f;--cd:#14272e;--tx:#e8f1f2;--mu:#9bb2b8;--pr:#47c2c9;--on:#05252b;--ok:#3ccf8b;--am:#f2c14e;--bad:#ff7a66;--ln:#243a41;color-scheme:dark}}
+@media print{:root{--bg:#fff;--cd:#fff;--tx:#000;--mu:#444;--pr:#0b4f5c;--on:#fff;--ln:#ccc}.np{display:none!important}}
+*{box-sizing:border-box;margin:0}
+body{font-family:system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5;font-size:16px;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.w{max-width:560px;margin:0 auto;padding:20px 16px 48px}
+h1,h2,.big{font-family:Georgia,"Noto Serif",serif;line-height:1.15}
+h1{font-size:34px;color:var(--pr)}
+h2{font-size:24px;margin:6px 0 18px}
+h3{font-size:18px;margin:26px 0 10px;font-family:Georgia,"Noto Serif",serif}
+.lead{font-size:20px;margin:8px 0 18px;max-width:30ch}
+.mu{color:var(--mu);font-size:14px}
+ul.pt{list-style:none;padding:0;margin:0 0 18px}
+ul.pt li{padding:6px 0 6px 26px;position:relative}
+ul.pt li:before{content:"";position:absolute;left:4px;top:13px;width:10px;height:10px;border-radius:50%;background:var(--ac)}
+label{display:block;font-size:15px;margin-bottom:16px}
+input{width:100%;margin-top:6px;padding:14px;font-size:17px;border:2px solid var(--ln);border-radius:12px;background:var(--cd);color:var(--tx)}
+button,.b{font:inherit;cursor:pointer;display:block;width:100%;text-align:center;text-decoration:none}
+.b{background:var(--pr);color:var(--on);border:0;border-radius:14px;padding:16px;font-size:18px;font-weight:700;min-height:56px;margin-top:10px}
+.b:disabled{opacity:.4}
+.b.wa{background:#1fa855;color:#fff}
+.g{background:none;border:0;color:var(--mu);padding:14px;margin-top:6px;font-size:15px}
+.o{text-align:left;background:var(--cd);color:var(--tx);border:2px solid var(--ln);border-radius:14px;padding:14px 16px;font-size:17px;min-height:54px;margin-bottom:10px}
+.o.on{background:var(--pr);color:var(--on);border-color:var(--pr)}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.bar{height:8px;background:var(--ln);border-radius:4px;overflow:hidden;margin-bottom:12px}
+.bar i,.tr i{display:block;height:100%;background:var(--pr)}
+.tr{height:6px;background:var(--ln);border-radius:3px;overflow:hidden;margin-top:6px}
+.cd{background:var(--cd);border:1px solid var(--ln);border-radius:12px;padding:14px 16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.big{font-size:46px;color:var(--tx);margin:2px 0}
+.big small{font-size:18px;color:var(--mu)}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:-1px}
+.sm{display:flex;align-items:center;padding:11px 0;border-bottom:1px solid var(--ln)}
+.sm div{flex:1}
+ol.pl{padding-left:22px}
+ol.pl li{padding:10px 0 10px 4px;border-bottom:1px solid var(--ln)}
+ol.pl b{display:block}
+.cta{background:var(--pr);color:var(--on);border-radius:16px;padding:20px 18px;margin-top:26px}
+.cta h3{margin:0 0 6px;color:var(--on)}
+.cta .b{background:#1fa855;color:#fff}
+.hrs{border-left:6px solid var(--ac)}
+</style>
+</head>
+<body>
+<noscript><p style="padding:20px">Activa JavaScript en tu navegador para usar la auditoría.</p></noscript>
+<div class="w" id="app"></div>
+<script>
+const WA='5356799321',NOM='NegocioClaro';
+const B=['El negocio','Dónde te encuentran','Oferta y competencia','Atención y pedidos','Cobro y después de la venta','Tiempo y herramientas'];
+// [bloque, pregunta, tipo (s única, m múltiple), opciones [texto, puntos], grupo (c contexto, d digital, m madurez), título si falla, arreglo]
+const Q=[
+[0,'¿Qué vendes?','s',[['Productos',0],['Servicios',0],['Las dos cosas',0]],'c'],
+[0,'¿Cuántas personas trabajan en tu negocio?','s',[['Solo yo',0],['2 o 3',0],['4 o más',0]],'c'],
+[0,'¿Cuántos clientes atiendes por semana?','s',[['Menos de 10',0],['De 10 a 30',0],['Más de 30',0]],'c'],
+[1,'¿Por dónde te encuentran hoy? Marca todas.','m',[['WhatsApp'],['Facebook'],['Instagram'],['Revolico'],['Telegram'],['Mi página web'],['Solo boca a boca']],'d','Te encuentran por pocos lugares','Abre al menos tres puertas: WhatsApp Business, una página de Facebook o Instagram, y un anuncio en Revolico.'],
+[1,'¿Tus anuncios o perfiles dicen claro qué vendes, el precio y cómo contactarte?','s',[['Sí, las tres cosas',3],['Me falta alguna',1],['No lo tengo claro',0]],'d','Tu mensaje está incompleto','En cada publicación y perfil pon qué vendes, desde cuánto cuesta y un enlace directo a tu WhatsApp.'],
+[1,'¿Tienes página web o catálogo online?','s',[['Página web propia',3],['Catálogo de WhatsApp Business',2],['Solo fotos sueltas',1],['Nada todavía',0]],'d','Sin catálogo ordenado','Crea un catálogo en WhatsApp Business y, cuando puedas, una web sencilla con tus servicios y tu contacto.'],
+[1,'¿Tienes reseñas o testimonios a la vista?','s',[['Sí, varios',3],['Pocos',1],['Ninguno',0]],'d','Nadie ve que otros ya te compraron','Pídeles un comentario a tus cinco mejores clientes y publícalo con su permiso.'],
+[2,'¿Tus precios están a la vista?','s',[['Sí, claros',3],['Solo si me preguntan',1],['No los publico',0]],'d','Precios escondidos','Publica tus precios, o al menos un “desde”, en tu catálogo. Quien no pregunta, no compra.'],
+[2,'¿Tienes ofertas o paquetes claros?','s',[['Sí, y los promociono',3],['Tengo, pero no los muestro',1],['No',0]],'d','Vendes pieza por pieza','Arma dos o tres paquetes (básico, completo, premium) con nombre y precio.'],
+[2,'¿Sabes qué hace tu competencia y en qué te diferencias?','s',[['Sí, lo tengo claro',3],['Más o menos',1],['No',0]],'d','No se nota qué te distingue','Mira a dos competidores y escribe en una frase por qué conviene comprarte a ti. Úsala en todos tus anuncios.'],
+[3,'¿Cuánto tardas en responder un mensaje?','s',[['Minutos',3],['Unas horas',2],['Un día o más',0]],'m','Respondes tarde','Responde en menos de una hora en tu horario y usa las respuestas rápidas de WhatsApp Business.'],
+[3,'¿Qué pasa con los mensajes fuera de horario o cuando estás ocupado?','s',[['Hay respuesta automática o alguien los atiende',3],['Los contesto cuando puedo',1],['Se quedan sin respuesta',0]],'m','Se pierden mensajes','Activa el mensaje de bienvenida y el de ausencia en WhatsApp Business, con tu horario y precios básicos.'],
+[3,'¿Dónde apuntas pedidos o citas?','s',[['En un programa o app',3],['En una hoja de cálculo',2],['En una libreta o en WhatsApp',1],['De memoria',0]],'m','Pedidos sin registro','Lleva todo en una sola hoja con fecha, cliente y estado del pedido. Así no se te pierde ninguno.'],
+[4,'¿Cómo cobras?','s',[['Efectivo y también transferencia o pago electrónico',3],['Solo en efectivo',1],['Cobro al entregar y a veces me deben',0]],'m','Cobro limitado','Ofrece también transferencia o pago electrónico, y pide un adelanto en los pedidos grandes.'],
+[4,'¿Qué haces después de vender?','s',[['Le escribo al cliente para dar seguimiento',3],['Algunas veces',1],['Nada',0]],'m','Después de la venta no pasa nada','Escríbele al cliente a los dos o tres días: ¿quedó contento?, ¿necesita algo más?'],
+[4,'¿Los clientes vuelven o te recomiendan?','s',[['Sí, muchos',3],['Algunos',1],['Casi ninguno',0]],'m','Los clientes no vuelven ni te recomiendan','Avísales cuando les toque repetir la compra y regala un detalle a quien te traiga otro cliente.'],
+[5,'¿Qué programas o apps usas para organizar el negocio?','s',[['Varias que me ayudan',3],['Una o dos',2],['Ninguna',0]],'m','Todo se hace a mano','Empieza con herramientas gratis: WhatsApp Business, una hoja de cálculo y plantillas de mensajes.'],
+[5,'¿Cuántas horas por semana se te van en tareas repetitivas a mano? (responder lo mismo, apuntar pedidos, cobrar)','s',[['Menos de 2 horas',3],['De 2 a 5 horas',2],['De 6 a 10 horas',1],['Más de 10 horas',0]],'m','Mucho tiempo a mano','Automatiza lo repetitivo: respuestas rápidas, catálogo y recordatorios. Ahí es donde la IA te devuelve horas.']
+];
+let S={n:'',i:0,v:'w'},A=[];
+try{const d=JSON.parse(localStorage.getItem('nc1'));if(d){S=d.S;A=d.A}}catch(e){}
+const sv=()=>{try{localStorage.setItem('nc1',JSON.stringify({S,A}))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const app=document.getElementById('app');
+const show=h=>{app.innerHTML=h;scrollTo(0,0)};
+const O=i=>{const q=Q[i];return q[4]=='c'||q[2]=='m'?q[3]:q[3].concat([['No sé',null]])};
+const P=i=>{const q=Q[i],a=A[i];if(a==null)return null;if(q[2]=='m')return Math.min(3,a.filter(x=>x<6).length);return O(i)[a][1]};
+const L=i=>{const p=P(i);return p!=null&&p<=1};
+const G=g=>{let e=0,m=0;Q.forEach((q,i)=>{if(q[4]!=g)return;const p=P(i);if(p!=null){e+=p;m+=3}});return m?{e,m}:null};
+
+function wel(){S.v='w';show(`<svg width="52" height="52" viewBox="0 0 52 52" aria-hidden="true"><rect width="52" height="52" rx="14" fill="var(--pr)"/><path d="M14 36V28M22 36V20M30 36V24M38 36V14" stroke="var(--on)" stroke-width="4" stroke-linecap="round"/><circle cx="38" cy="14" r="4" fill="var(--ac)"/></svg>
+<h1 style="margin-top:14px">${NOM}</h1>
+<p class="lead">Descubre qué le falta a tu negocio para vender más.</p>
+<ul class="pt"><li>18 preguntas de toque, unos 5 minutos</li><li>Informe gratis con tus notas y un plan de mejora</li><li>Tus respuestas se quedan en tu teléfono</li></ul>
+<label>Nombre de tu negocio (opcional)<input id="nm" value="${esc(S.n)}" placeholder="Por ejemplo: Barbería Don Pepe" maxlength="40"></label>
+<button class="b" onclick="go()">Empezar mi auditoría</button>`)}
+function go(){S.n=document.getElementById('nm').value.trim();S.v='q';sv();qz()}
+
+function qz(){const i=S.i,q=Q[i],o=O(i),a=A[i],mu=q[2]=='m';
+show(`<div class="bar"><i style="width:${i/Q.length*100}%"></i></div>
+<p class="mu">${B[q[0]]}, pregunta ${i+1} de ${Q.length}</p>
+<h2>${q[1]}</h2>
+${o.map((x,k)=>`<button class="o${mu?(a&&a.includes(k)?' on':''):(a===k?' on':'')}" onclick="pick(${k})">${x[0]}</button>`).join('')}
+${mu?`<button class="b" onclick="nx()" ${a&&a.length?'':'disabled'}>Continuar</button>`:''}
+<button class="g" onclick="bk()">Volver atrás</button>`)}
+function pick(k){const q=Q[S.i];if(q[2]=='m'){let a=A[S.i]||[];if(a.includes(k))a=a.filter(x=>x!=k);else a=k==6?[6]:a.filter(x=>x!=6).concat(k);A[S.i]=a;sv();qz()}else{A[S.i]=k;sv();setTimeout(nx,160)}}
+function nx(){if(S.i<Q.length-1){S.i++;sv();qz()}else{S.v='r';sv();res()}}
+function bk(){if(S.i>0){S.i--;sv();qz()}else wel()}
+function rs(){A=[];S={n:S.n,i:0,v:'w'};sv();wel()}
+
+function res(){
+const d=G('d'),m=G('m'),dn=d?Math.round(d.e/d.m*100):null,mn=m?+(1+4*m.e/m.m).toFixed(1):null;
+const cl=n=>n<40?'bad':n<75?'am':'ok';
+const bn=n=>n<40?'Crítica':n<60?'Floja':n<75?'Aceptable':n<90?'Buena':'De referencia';
+const LV=['Artesanal','Herramientas sueltas','Digitalizado a mano','Conectado','Automatizado'];
+const met=(t,v,u,lab,pc)=>`<div class="cd"><p class="mu">${t}</p><p class="big">${v==null?'—':v}<small>${v==null?'':u}</small></p><p><span class="dot" style="background:var(--${v==null?'mu':cl(pc)})"></span>${v==null?'Sin datos':lab}</p><div class="tr"><i style="width:${v==null?0:pc}%;background:var(--${v==null?'mu':cl(pc)})"></i></div></div>`;
+const mp=mn==null?0:(mn-1)/4*100;
+// semáforo por bloque
+const sem=[1,2,3,4,5].map(b=>{let e=0,x=0;Q.forEach((q,i)=>{if(q[0]!=b)return;const p=P(i);if(p!=null){e+=p;x+=3}});const r=x?e/x:null,c=r==null?'mu':r>=.67?'ok':r>=.34?'am':'bad',t=r==null?'Sin datos':r>=.67?'Bien':r>=.34?'Mejorable':'Urgente';return `<div class="sm"><span class="dot" style="background:var(--${c})"></span><div>${B[b]}</div><b>${t}</b></div>`}).join('');
+// horas a mano (solo lo que declaró la persona, tomando el mínimo de cada rango)
+const hv=A[17]!=null&&A[17]<4?[0,2,6,10][A[17]]:0,hm=Math.floor(hv*4.3);
+// cruces
+const w=(A[3]||[]).includes(0),C=[];
+if(w&&(L(10)||L(11)))C.push(['Te escriben por WhatsApp, pero respondes tarde o se pierden mensajes','Cada mensaje sin respuesta rápida es un cliente que le compra a otro. Activa respuestas automáticas y contesta en menos de una hora.']);
+if(L(7)&&A[17]!=null&&A[17]>=2&&A[17]<4)C.push(['No muestras precios y repites las mismas respuestas todo el día','Publica tus precios en un catálogo: te quita preguntas repetidas y te devuelve horas.']);
+if(L(14)&&L(15))C.push(['Vendes, pero no das seguimiento ni consigues que te recomienden','Un mensaje a los tres días y un detalle por cada cliente que traigas hacen que vuelvan y te recomienden.']);
+const F=Q.map((q,i)=>({i,t:q[5],f:q[6],p:P(i)})).filter(x=>x.t&&L(x.i)).sort((a,b)=>a.p-b.p||a.i-b.i);
+const plan=C.map(x=>({t:x[0],f:x[1],c:1})).concat(F).slice(0,5);
+const nd=Q.filter((q,i)=>q[4]!='c'&&A[i]!=null&&P(i)==null).length;
+const top=plan.slice(0,3).map((x,k)=>`${k+1}) ${x.t}`).join('. ');
+const msg=`Hola, soy ${S.n||'dueño de un negocio'}. Hice la auditoría en ${NOM}: nota digital ${dn==null?'sin datos':dn+'/100'} y madurez ${mn==null?'sin datos':mn+'/5'}. Lo que más me falla: ${top||'no salieron puntos críticos'}. Quiero que me ayuden a mejorarlo con IA.`;
+const wa=`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+show(`<p class="mu">Autodiagnóstico de</p><h1>${esc(S.n)||'tu negocio'}</h1>
+<div class="g2">${met('Nota digital',dn,'/100',dn==null?'':bn(dn),dn)}${met('Madurez',mn,'/5',mn==null?'':LV[Math.min(4,Math.floor(mn)-1)],mp)}</div>
+<p class="mu">La nota digital mide lo que muestras a tus clientes. La madurez mide cómo trabajas por dentro.</p>
+<h3>Cómo está cada parte</h3>${sem}
+${hm>0?`<div class="cd hrs" style="margin-top:20px"><p>Al menos <b>${hm} horas al mes</b> se te van en tareas repetitivas a mano.</p><p class="mu">Operación: ${hv} horas por semana × 4,3 = ${hm} horas al mes</p></div>`:''}
+<h3>Qué mejorar primero</h3>
+${plan.length?`<ol class="pl">${plan.map(x=>`<li><b>${x.t}</b>${x.f}${x.c?'<span class="mu"> Sale de cruzar dos de tus respuestas.</span>':''}</li>`).join('')}</ol>`:'<p>No salieron puntos críticos con tus respuestas. Buen trabajo: el siguiente paso es automatizar para ganar tiempo.</p>'}
+<div class="cta np"><h3>¿Quieres que lo arreglemos por ti?</h3><p>Con IA: tu página web, respuestas automáticas, pedidos y recordatorios que trabajan mientras tú atiendes.</p><a class="b" href="${wa}" target="_blank" rel="noopener">Hablar por WhatsApp</a></div>
+<button class="b np" style="background:var(--cd);color:var(--tx);border:2px solid var(--ln)" onclick="print()">Guardar informe en PDF</button>
+<button class="g np" onclick="rs()">Hacer la auditoría de nuevo</button>
+<p class="mu" style="margin-top:14px">Este informe sale de lo que tú respondiste. ${nd?`Marcaste “No sé” en ${nd} pregunta${nd>1?'s':''}: no puntúan y quedan como sin datos. `:''}No se revisó ningún sistema ni cuenta de tu negocio.</p>`)}
+
+if(S.v=='q')qz();else if(S.v=='r')res();else wel();
+</script>
+</body>
+</html>
