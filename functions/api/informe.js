@@ -58,3 +58,4 @@ export async function onRequestPost({ request, env }) {
 export async function onRequestGet({ env }) {
   return Response.json({ ok: true, ai: !!env.AI });
 }
+
