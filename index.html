@@ -148,8 +148,9 @@ async function ia(dn,mn,hm,plan){const el=document.getElementById('ia');if(!el||
 el.innerHTML='<div class="cd" style="margin-top:20px"><p class="mu">Escribiendo tu resumen personalizado…</p></div>';
 try{const c=new AbortController(),t=setTimeout(()=>c.abort(),20000);
 const r=await fetch('/api/informe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({n:S.n,dn,mn,hm,p:plan.slice(0,3).map(x=>x.t)}),signal:c.signal});clearTimeout(t);
-const j=await r.json();if(!r.ok||!j.t)throw 0;
-el.innerHTML=`<div class="cd" style="margin-top:20px"><p class="mu">Resumen para tu negocio</p><p>${esc(j.t).replace(/\n/g,'<br>')}</p></div>`}catch(e){el.innerHTML=''}}
+let j={};try{j=await r.json()}catch(x){}
+if(!r.ok||!j.t)throw new Error('código '+r.status+(j.d?', '+j.d:''));
+el.innerHTML=`<div class="cd" style="margin-top:20px"><p class="mu">Resumen para tu negocio</p><p>${esc(j.t).replace(/\n/g,'<br>')}</p></div>`}catch(e){el.innerHTML='<p class="mu" style="margin-top:14px">No se pudo escribir el resumen con IA ('+esc(e&&e.name=='AbortError'?'tardó demasiado':(e&&e.message)||'error')+'). El informe sigue siendo válido.</p>'}}
 
 if(S.v=='q')qz();else if(S.v=='r')res();else wel();
 </script>
